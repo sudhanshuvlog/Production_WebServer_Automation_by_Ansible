@@ -1,0 +1,15 @@
+---
+# vars file for create_instance
+
+aws_access_key: "***********"
+aws_secret_key: "***************"
+no_of_instance: "3"
+
+loops: 
+   - 1
+   - 2
+   - 3
+   
+
+
+

@@ -1,0 +1,13 @@
+---
+# vars file for loadblancer
+#
+webserver_ip:
+        - id: 1 
+          ip: 172.31.41.216
+        
+        - id: 2
+          ip: 13.232.248.154
+
+
+        - id: 3
+          ip: 52.66.214.43

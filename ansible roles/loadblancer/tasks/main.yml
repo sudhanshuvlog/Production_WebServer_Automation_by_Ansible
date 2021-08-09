@@ -1,0 +1,10 @@
+---
+# tasks file for loadblancer
+#
+ - template: 
+         src: "/loadblancer_practical_ip.txt"
+         dest: "/ip.txt"
+
+ - template:
+         src: "/ws6/haproxy.cfg"
+         dest: "/etc/haproxy/haproxy.cfg"

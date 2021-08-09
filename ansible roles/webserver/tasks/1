@@ -1,0 +1,37 @@
+---
+# tasks file for webserver
+#
+ - package:
+         name: "httpd"
+         state: "present"
+
+ - package:
+         name: "python3"
+         state: "present"
+
+ - service:
+         name: "httpd"
+         state: "started"
+
+
+ - copy:
+         src: "/var/www/html/"
+         dest: "/var/www/html/"
+   register: html_changed
+
+ - copy: 
+        src: "/var/www/cgi-bin/"
+        dest: "/var/www/cgi-bin/"
+   register: cgi_changed     
+
+ - command: "chmod +x /var/www/cgi-bin/cmd.py"
+
+ - template:
+         src: "/etc/sudoers"
+         dest: "/etc/sudoers"
+
+ - service:
+         name: httpd
+         state: restarted
+   when: html_changed.changed== true or cgi_changed.changed == true
+

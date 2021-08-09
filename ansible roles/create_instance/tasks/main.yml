@@ -1,0 +1,50 @@
+---
+# tasks file for create_instance
+#
+#
+
+ 
+  - pip:
+     name: boto
+
+  - ec2:
+        aws_access_key: "{{aws_access_key}}"
+        aws_secret_key: "{{aws_secret_key}}"
+        region: ap-south-1
+        vpc_subnet_id: subnet-f5ddb6b9
+        key_name: hadoopkey
+        instance_type: t2.micro
+        image: "ami-08f63db601b82ff5f"
+        wait: true
+        exact_count: "{{no_of_instance}}"
+        count_tag:
+           Name: "demo"
+        instance_tags:
+            Name: "demo"
+    register: ec2
+    when: false
+
+
+  - debug:
+          msg: "{{ec2}}"
+    when: false      
+
+
+  - name: Gather information about all instances in AZ ap-south-1b
+    community.aws.ec2_instance_info:
+      filters:
+        availability-zone: ap-south-1b
+    register: instance_details
+
+
+  - debug:
+      msg: '{{instance_details.instances[item].public_ip_address}}'
+    loop: '{{loops}}'
+    register: ip
+           
+
+  - template:
+      src: "/ip1.txt"
+      dest: "/ip.txt"
+     
+          

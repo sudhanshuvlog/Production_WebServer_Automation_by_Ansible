@@ -1,0 +1,18 @@
+- hosts: localhost
+  
+  roles:
+  - role: create_instance
+
+  
+
+
+- hosts: all
+
+  roles:
+  - role: webserver
+
+
+- hosts: localhost
+
+  roles:  
+  - role: loadblancer
